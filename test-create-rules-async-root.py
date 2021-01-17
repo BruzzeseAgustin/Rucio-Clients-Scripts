@@ -68,7 +68,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Import Magic naming 
-from lfn2pfn import *
+from lfn2pfn_MAGIC import *
 
 
 # In[2]:
