@@ -83,7 +83,7 @@ from lfn2pfn_CTA import *
 
 
 class Rucio :
-    def __init__(self, myscope, orgRse, destRse, account='bruzzese', working_folder=None):
+    def __init__(self, myscope, orgRse, destRse, account='root', working_folder=None):
         
         self.myscope = myscope
         self.orgRse = orgRse 
