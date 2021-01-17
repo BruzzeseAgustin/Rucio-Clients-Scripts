@@ -82,7 +82,7 @@ def PrintException():
     print('EXCEPTION IN ({}, LINE {} "{}"): {}'.format(filename, lineno, line.strip(), exc_obj))
 
 # Configuration
-account='bruzzese'
+account='root'
 #auth_type='x509'
 
 my_folder_test = 'CTA-test-v1'
