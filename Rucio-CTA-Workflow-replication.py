@@ -859,7 +859,7 @@ if __name__ == '__main__':
     # Initialize Rucio class and functions
 
     r1 = Rucio(myscope='test-root', orgRse='PIC-NON-DET', 
-               destRse=['PIC-DCACHE'], 
+               destRse=['PIC-DET'], 
                account='root', working_folder='CTA-test-v1')
 
     r1.myfunc() 
