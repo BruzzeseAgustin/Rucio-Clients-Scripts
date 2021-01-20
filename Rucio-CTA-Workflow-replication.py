@@ -589,10 +589,11 @@ class Look_for_Files :
     def check_directory(self, path):
         try :
             full_path = self.gfal.listdir(str(path))
-            if not full_path :
-                is_dir_or_not = False
-            else:
-                is_dir_or_not = True        
+            is_dir_or_not = True 
+            # if not full_path :
+            #     is_dir_or_not = False
+            # else:
+            #     is_dir_or_not = True        
         except:
             is_dir_or_not = False
 
