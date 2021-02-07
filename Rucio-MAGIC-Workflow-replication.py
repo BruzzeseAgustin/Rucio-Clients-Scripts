@@ -583,8 +583,9 @@ class Look_for_Files :
 
         # Itinerate over all the entries  
         listFiles = self.gfal.listdir(str(self.path))
-        for file in listFiles :
-            # Create full Path 
+        #for file in listFiles :
+	for file in [x for x in listFiles if x != '.' if x != '..']:
+	    # Create full Path 
             fullPath = os.path.join(self.path, file)
             is_dir = self.check_directory(fullPath) 
             # If entry is a directory then get the list of files in
@@ -601,7 +602,8 @@ class Look_for_Files :
 
         # Itinerate over all the entries  
         listFiles = self.gfal.listdir(str(path))
-        for file in listFiles :
+        #for file in listFiles :
+	for file in [x for x in listFiles if x != '.' if x != '..']:
             # Create full Path 
             fullPath = os.path.join(path, file)
             is_dir = self.check_directory(fullPath)
