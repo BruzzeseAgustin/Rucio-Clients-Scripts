@@ -223,7 +223,6 @@ try :
 except :
     PrintException()
 
-get_ipython().system('date')
 
 
 # In[5]:
