@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# In[ ]:
+
+
+# coding: utf-8
+
 # In[1]:
 
 
@@ -177,8 +182,17 @@ def check_replica(myscope, lfn, dest_rse):
 
     return False
 
+        
+def experiment_metadata(did, key, value, myscope='test-root') :
+    try :
+        set_meta = didc.set_metadata(scope=myscope, name=did, key=key, value=value, recursive=False)
+        return(True)
+    except : 
+        return(False)  
 
-# In[4]:
+
+# In[ ]:
+
 
 
 # Global variables definition : 
@@ -202,7 +216,6 @@ def get_rse_url(rse):
     if port != 0:
         url = url + ':' + str(port)
     rse_url = url + prefix
-    #print(rse_url)
     return(rse_url)
 
 # Predifine origin RSE 
@@ -218,15 +231,14 @@ DEFAULT_SCOPE = 'test-root'
 # Destiny RSEs
 rses_catch = ['PIC-DET-2'] 
 # Check if our test folder still exists 
-# try :
-#    gfal.mkdir_rec(DEFAULT_PATH, 775)
-# except :
-#     PrintException()
-
-# get_ipython().system('date')
+try :
+    gfal.mkdir_rec(DEFAULT_PATH, 775)
+except :
+    PrintException()
 
 
-# In[5]:
+# In[ ]:
+
 
 
 ############################
@@ -315,6 +327,11 @@ def create_groups(organization, myscope=Default_Scope) :
     createcontainer(organization['container_3'].replace('%','_'))
     # 2.4.1) Attach the dataset and containers for the file
     registerIntoGroup(organization['container_2'].replace('%','_'), organization['container_3'].replace('%','_'))
+
+    experiment_metadata(organization['fullname'].replace('+','_'), 'run_number', str(organization['run_number'].replace('%','_')))
+    experiment_metadata(organization['fullname'].replace('+','_'), 'night', str(organization['night'].replace('%','_')))
+    experiment_metadata(organization['fullname'].replace('+','_'), 'datatype', str(organization['datatype'].replace('%','_')))
+    experiment_metadata(organization['fullname'].replace('+','_'), 'telescope', str(organization['telescope'].replace('%','_')))
 
 ############################
 
@@ -440,10 +457,6 @@ def outdated_register_replica(filemds, dest_RSE, org_RSE, myscope=Default_Scope)
                     
 ############################
 
-
-# In[6]:
-
-
 # First part of the script
 
 ## It creates the main rule for replication at Destinatio RSE (see rses_catch)
@@ -453,7 +466,9 @@ listOfFiles = scrap_through_dir(DEFAULT_PATH)
 print()
 
 
-# In[7]:
+# In[ ]:
+
+
 
 
 # General Functions for the script
@@ -577,5 +592,3 @@ if listOfFiles :
             print('you are going to replicate: ' + str(len(n_unreplicated)))
             print(destRSE, DEFAULT_ORIGIN_RSE)
             outdated_register_replica(n_unreplicated, destRSE, DEFAULT_ORIGIN_RSE)
-
-        # Finally return the information of the replicas as a dictionary
